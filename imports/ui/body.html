@@ -1,0 +1,47 @@
+<body>
+    <div class="container">
+        <header>
+            <h1> Twitch Notifier </h1>
+
+            {{> loginButtons}}
+
+            {{#if currentUser }}
+                <form class="new-streamer">
+                    <input type="text" name="text" placeholder="Type to add new streamer">
+                </form>
+                
+                <form class="twitch-user">
+                    <input type="text" name="text" placeholder="Your twitch username">
+                </form>
+
+                <button class="update">Update</button>
+            {{/if}}
+        </header>
+
+        {{#if currentUser }}
+            {{#if isReady}}
+                <section class="streamers">
+                    {{#each streamers}}
+                        {{> streamer}}
+                    {{/each}}
+                </section>
+            {{else}}
+                <p>Loading...</p>
+            {{/if}}
+        {{/if}}
+    </div>
+</body>
+
+<template name="streamer">
+    <article id="streamer-{{_id}}" class="streamer {{#if offline}} offline {{/if}}">
+        <h3>{{name}}</h3>
+        <span>Playing: <strong>{{currentGame}}</strong></span>
+        <button class="delete">&times;</button>
+        <div class="notify-boxes">
+            Notify by:
+            <input type="checkbox" name="notify" value="push"> Push
+            <input type="checkbox" name="notify" value="discord"> Discord
+            <input type="checkbox" name="notify" value="email"> Email
+        </div>
+    </article>
+</template>

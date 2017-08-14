@@ -1,0 +1,31 @@
+/* CSS declarations go here */
+
+.notify-boxes {
+    padding: 5px;
+}
+
+article.streamer {
+    margin: 15px;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 2px 4px rgba(0, 0, 0, 0.2);
+    background:
+}
+
+article.streamer > h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.delete {
+    float: right;
+}
+
+section.streamers {
+    width: 40%;
+    margin: 0 15%;
+}
+
+.offline {
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.5);
+}

@@ -7,13 +7,6 @@ import './body.html';
 
 import Push from 'push.js'
 
-//const streamersHandle = Meteor.subscribe('twitch.Streamers');
-
-//TODO:
-// Limit number of people returned
-// Infinite scrolling?
-// Pages?
-
 Template.streamer_list.helpers({
     streamers() {
         return Streamers.find({
@@ -67,7 +60,6 @@ Template.body.events({
     'click .update'(event) {
         event.preventDefault();
         Meteor.call('twitch.forceUpdate');
-        //Meteor.call('twitch.fetchData');
     },
     'click .delete'() {
         document.getElementById('streamer-'+this._id).style.display = 'none';

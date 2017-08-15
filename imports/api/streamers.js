@@ -44,7 +44,7 @@ if(Meteor.isServer){
         return Streamers.find();
     });
 
-    Meteor.publish('streamersInfinite',function(limit, query) {
+    Meteor.publish('streamersInfinite', (limit, query)=>{
         var selector = {};
         check(limit, Number);
         check(query.usersToUpdate, String);

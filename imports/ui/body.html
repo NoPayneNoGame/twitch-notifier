@@ -9,7 +9,7 @@
                 <form class="new-streamer">
                     <input type="text" name="text" placeholder="Type to add new streamer">
                 </form>
-                
+
                 <form class="twitch-user">
                     <input type="text" name="text" placeholder="Your twitch username">
                 </form>
@@ -39,10 +39,23 @@
 </template>
 
 <template name="streamer_list">
+
+    <form class="user-search">
+        <input class="us-input" type="text" name="text" placeholder="Search...">
+    </form>
+
     <section class="streamers">
-        {{#each streamers}}
-            {{> streamer}}
-        {{/each}}
+        {{#if searching}}
+            {{#each searchedStreamer}}
+                {{> streamer}}
+            {{/each}}
+        {{else}}
+            {{#each streamers}}
+                {{> streamer}}
+            {{/each}}
+        {{/if}}
     </section>
-    {{> infiniteScroll }}
+    {{#unless searching}}
+        {{> infiniteScroll }}
+    {{/unless}}
 </template>

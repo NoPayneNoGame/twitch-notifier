@@ -8,7 +8,8 @@ article.streamer {
     margin: 15px;
     padding: 10px 20px;
     box-shadow: 0px 0px 2px 4px rgba(0, 0, 0, 0.2);
-    background:
+    float: left;
+    width: 40%;
 }
 
 article.streamer > h3 {
@@ -21,11 +22,15 @@ article.streamer > h3 {
 }
 
 section.streamers {
-    width: 40%;
+    width: 60%;
     margin: 0 15%;
 }
 
 .offline {
     background: rgba(0, 0, 0, 0.1);
     color: rgba(0, 0, 0, 0.5);
+}
+
+.infinite-load-more {
+    clear: both;
 }

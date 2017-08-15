@@ -43,6 +43,24 @@ if(Meteor.isServer){
     Meteor.publish('twitch.Streamers', ()=>{
         return Streamers.find();
     });
+
+    Meteor.publish('streamersInfinite',function(limit, query) {
+        var selector = {};
+        check(limit, Number);
+        check(query.usersToUpdate, String);
+        // Assign safe values to a new object after they have been validated
+        selector.usersToUpdate = query.usersToUpdate;
+
+      	return Streamers.find(selector, {
+            limit: limit,
+            // Using sort here is necessary to continue to use the Oplog Observe Driver!
+            // https://github.com/meteor/meteor/wiki/Oplog-Observe-Driver
+            sort: {
+                offline: 1,
+                nameLower: 1
+            }
+        });
+    });
 }
 
     // Meteor.publish('twitch.getStreamData',()=>{

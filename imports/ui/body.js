@@ -7,29 +7,36 @@ import './body.html';
 
 import Push from 'push.js'
 
-const streamersHandle = Meteor.subscribe('twitch.Streamers');
+//const streamersHandle = Meteor.subscribe('twitch.Streamers');
 
 //TODO:
 // Limit number of people returned
 // Infinite scrolling?
 // Pages?
 
-Template.body.helpers({
+Template.streamer_list.helpers({
     streamers() {
-        if(streamersHandle.ready()) {
-             return Streamers.find({
-                usersToUpdate: Meteor.user()._id
-            }, {
-                sort: {
-                    offline: 1,
-                    nameLower: 1
-                }
-            });
-        }
+        return Streamers.find({
+            usersToUpdate: Meteor.user()._id
+        }, {
+            limit: Template.instance().getLimit(),
+            sort: {
+                offline: 1,
+                nameLower: 1
+            }
+        });
     },
-    isReady() {
-        return streamersHandle.ready();
-    }
+});
+
+Template.streamer_list.onCreated(function() {
+    this.infiniteScroll({
+        perPage: 10,
+        query: {
+            usersToUpdate: Meteor.user()._id
+        },
+        collection: 'streamers',
+        publication: 'streamersInfinite'
+    });
 });
 
 Template.body.events({
@@ -66,4 +73,4 @@ Template.body.events({
         document.getElementById('streamer-'+this._id).style.display = 'none';
         Meteor.call('streamers.remove', this._id);
     }
-})
+});
